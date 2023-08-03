@@ -26,3 +26,20 @@ function animate() {
 
 // Start the animation loop
 animate()
+
+// Handle keyboard input
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'w' && player.velocity.y === 0) {
+        player.velocity.y = -5
+    } else if (e.key === 'a') {
+        player.velocity.x = -5
+    } else if (e.key === 'd') {
+        player.velocity.x = 5
+    }
+})
+
+window.addEventListener('keyup', (e) => {
+    if (e.key === 'a' || e.key === 'd') {
+        player.velocity.x = 0
+    }
+})
