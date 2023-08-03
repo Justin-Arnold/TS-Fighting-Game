@@ -12,12 +12,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!
 const ctx = canvas.getContext('2d')!
 
-// define the animate function
-
+// Define the player and enemy
 const player = new Sprite({ x: 0, y: -150 }, { x: 0, y: 10 })
 const enemy = new Sprite({ x: 100, y: -150 }, { x: 0, y: 10 })
 
-
+// Define the animation loop
 function animate() {
     window.requestAnimationFrame(animate)
     ctx?.clearRect(0, 0, 1024, 568)
@@ -25,4 +24,5 @@ function animate() {
     enemy.update(ctx, 512)
 }
 
+// Start the animation loop
 animate()
