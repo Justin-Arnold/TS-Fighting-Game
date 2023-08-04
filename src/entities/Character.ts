@@ -20,4 +20,22 @@ export default class Character extends BaseEntity {
             ? this.velocity.y = -this.jumpHeight
             : null
     }
+
+    public moveLeft() {
+        this.isAtEdgeOfScreen('left')
+            ? null
+            : this.velocity.x = -5
+    }
+
+    public moveRight() {
+        this.isAtEdgeOfScreen('right')
+            ? null
+            : this.velocity.x = 5
+    }
+
+    private isAtEdgeOfScreen(direction: 'left' | 'right') {
+        return direction === 'left'
+            ? this.position.x <= 0
+            : this.position.x + this.width >= this.canvasContext.canvas.width
+    }
 }

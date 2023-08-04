@@ -45,4 +45,5 @@ export default class BaseEntity {
     protected isOnGround() {
         return this.position.y + this.height + this.velocity.y >= this.canvasContext.canvas.height
     }
+
 }

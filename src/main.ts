@@ -2,6 +2,7 @@ import './assets/css/tailwind.css'
 import Ninja from './entities/Ninja'
 import Samurai from './entities/Samurai'
 
+
 // Create the canvas and append it to the DOM
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="h-screen w-screen bg-black grid place-items-center overflow-hidden py-8">
@@ -34,14 +35,22 @@ window.addEventListener('keydown', (e) => {
     if (e.key === 'w') {
         player.jump()
     } else if (e.key === 'a') {
-        player.velocity.x = -5 // TODO - Move this to the class
+        player.moveLeft()
     } else if (e.key === 'd') {
-        player.velocity.x = 5
+        player.moveRight()
+    } else if (e.key === 'ArrowUp') {
+        enemy.jump()
+    } else if (e.key === 'ArrowLeft') {
+        enemy.moveLeft()
+    } else if (e.key === 'ArrowRight') {
+        enemy.moveRight()
     }
 })
 
 window.addEventListener('keyup', (e) => {
     if (e.key === 'a' || e.key === 'd') {
         player.velocity.x = 0
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        enemy.velocity.x = 0
     }
 })
