@@ -6,12 +6,13 @@ export default class Character extends BaseEntity {
     protected jumpHeight: number = 5
 
     constructor(
-        public canvasContext: CanvasRenderingContext2D,
-        public position: BaseEntity['position'],
+        canvasContext: CanvasRenderingContext2D,
+        position: BaseEntity['position'],
+        height: number,
+        width: number,
+        color: string
     ) {
-        super(canvasContext, position)
-        this.height = 150
-        this.width = 50
+        super(canvasContext, position, height, width, color);
     }
 
     public jump() {

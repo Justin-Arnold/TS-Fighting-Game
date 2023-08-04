@@ -5,15 +5,15 @@ import type { Vector } from './../types.ts'
 /** A BaseEntity represents a generic entity in the game that can exist in 2D space and optionally move. */
 export default class BaseEntity {
 
-    private _gravity: number = 0.6
-    public velocity: Vector = { x: 0, y: 0 }
-    protected height: number = 0
-    protected width: number = 0
-    protected color: string = 'black'
+    private _gravity: number = 0.6;
+    public velocity: Vector = { x: 0, y: 0 };
 
     constructor(
         public canvasContext: CanvasRenderingContext2D,
         public position: Vector,
+        protected height: number,
+        protected width: number,
+        protected color: string,
     ) { }
 
     protected draw() {

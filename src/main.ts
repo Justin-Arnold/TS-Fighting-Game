@@ -15,8 +15,8 @@ const ctx = canvas.getContext('2d')!
 
 
 // Define the player and enemy
-const enemy = new Samurai({ x: 800, y: -150 }, ctx)
-const player = new Ninja({ x: 100, y: -150 }, ctx)
+const enemy = new Samurai({ x: 800, y: 300 }, ctx)
+const player = new Ninja({ x: 100, y: 300 }, ctx)
 
 // Define the animation loop
 function animate() {
@@ -34,7 +34,7 @@ window.addEventListener('keydown', (e) => {
     if (e.key === 'w') {
         player.jump()
     } else if (e.key === 'a') {
-        player.velocity.x = -5
+        player.velocity.x = -5 // TODO - Move this to the class
     } else if (e.key === 'd') {
         player.velocity.x = 5
     }
