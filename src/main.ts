@@ -1,5 +1,6 @@
 import './tailwind.css'
-import { Ninja, Samurai } from './sprite'
+import Ninja from './entities/Ninja'
+import Samurai from './entities/Samurai'
 
 // Create the canvas and append it to the DOM
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -12,16 +13,17 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!
 const ctx = canvas.getContext('2d')!
 
+
 // Define the player and enemy
-const enemy = new Samurai({ x: 800, y: -150 })
-const player = new Ninja({ x: 100, y: -150 })
+const enemy = new Samurai({ x: 800, y: -150 }, ctx)
+const player = new Ninja({ x: 100, y: -150 }, ctx)
 
 // Define the animation loop
 function animate() {
     window.requestAnimationFrame(animate)
     ctx?.clearRect(0, 0, 1024, 512)
-    enemy.update(ctx, 512)
-    player.update(ctx, 512)
+    enemy.update()
+    player.update()
 }
 
 // Start the animation loop
