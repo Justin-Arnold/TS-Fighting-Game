@@ -1,7 +1,7 @@
-import type { Vector } from './../types.ts'
-
-
-
+type Vector = {
+    x: number
+    y: number
+}
 /** A BaseEntity represents a generic entity in the game that can exist in 2D space and optionally move. */
 export default class BaseEntity {
 

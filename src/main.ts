@@ -1,4 +1,4 @@
-import './tailwind.css'
+import './assets/css/tailwind.css'
 import Ninja from './entities/Ninja'
 import Samurai from './entities/Samurai'
 

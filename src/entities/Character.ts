@@ -6,11 +6,11 @@ export default class Character extends BaseEntity {
     protected jumpHeight: number = 5
 
     constructor(
-        canvasContext: CanvasRenderingContext2D,
+        canvasContext: BaseEntity['canvasContext'],
         position: BaseEntity['position'],
-        height: number,
-        width: number,
-        color: string
+        height: BaseEntity['height'],
+        width: BaseEntity['width'],
+        color: BaseEntity['color'],
     ) {
         super(canvasContext, position, height, width, color);
     }
