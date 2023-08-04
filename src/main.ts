@@ -1,5 +1,5 @@
 import './tailwind.css'
-import Sprite from './sprite'
+import { Ninja, Samurai } from './sprite'
 
 // Create the canvas and append it to the DOM
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -13,15 +13,15 @@ const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!
 const ctx = canvas.getContext('2d')!
 
 // Define the player and enemy
-const player = new Sprite({ x: 0, y: -150 }, { x: 0, y: 10 })
-const enemy = new Sprite({ x: 100, y: -150 }, { x: 0, y: 10 })
+const enemy = new Samurai({ x: 800, y: -150 })
+const player = new Ninja({ x: 100, y: -150 })
 
 // Define the animation loop
 function animate() {
     window.requestAnimationFrame(animate)
-    ctx?.clearRect(0, 0, 1024, 568)
-    player.update(ctx, 512)
+    ctx?.clearRect(0, 0, 1024, 512)
     enemy.update(ctx, 512)
+    player.update(ctx, 512)
 }
 
 // Start the animation loop
@@ -29,8 +29,8 @@ animate()
 
 // Handle keyboard input
 window.addEventListener('keydown', (e) => {
-    if (e.key === 'w' && player.velocity.y === 0) {
-        player.velocity.y = -5
+    if (e.key === 'w') {
+        player.jump()
     } else if (e.key === 'a') {
         player.velocity.x = -5
     } else if (e.key === 'd') {
