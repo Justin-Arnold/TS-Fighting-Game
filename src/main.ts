@@ -1,56 +1,38 @@
 import './assets/css/tailwind.css'
+import GameInstance from './core/GameInstance'
 import Ninja from './entities/Ninja'
 import Samurai from './entities/Samurai'
 
 
-// Create the canvas and append it to the DOM
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-    <div class="h-screen w-screen bg-black grid place-items-center overflow-hidden py-8">
-        <canvas id="canvas" height="512" width="1024" class="bg-white"></canvas>
-    </div>
-`
-
-// Get the canvas and its context
-const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!
-const ctx = canvas.getContext('2d')!
+const game = new GameInstance()
 
 
 // Define the player and enemy
-const enemy = new Samurai({ x: 800, y: 300 }, ctx)
-const player = new Ninja({ x: 100, y: 300 }, ctx)
+const enemy = new Samurai({
+    startingPosition: { x: 800, y: 300 },
+    keyBinds: {
+        jump: 'ArrowUp',
+        left: 'ArrowLeft',
+        right: 'ArrowRight',
+    }
+}, game.canvasContext)
+
+const player = new Ninja({
+    startingPosition: { x: 200, y: 300 },
+    keyBinds: {
+        jump: 'w',
+        left: 'a',
+        right: 'd',
+    }
+}, game.canvasContext)
 
 // Define the animation loop
 function animate() {
     window.requestAnimationFrame(animate)
-    ctx?.clearRect(0, 0, 1024, 512)
+    game.canvasContext.clearRect(0, 0, 1024, 512)
     enemy.update()
     player.update()
 }
 
 // Start the animation loop
 animate()
-
-// Handle keyboard input
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'w') {
-        player.jump()
-    } else if (e.key === 'a') {
-        player.moveLeft()
-    } else if (e.key === 'd') {
-        player.moveRight()
-    } else if (e.key === 'ArrowUp') {
-        enemy.jump()
-    } else if (e.key === 'ArrowLeft') {
-        enemy.moveLeft()
-    } else if (e.key === 'ArrowRight') {
-        enemy.moveRight()
-    }
-})
-
-window.addEventListener('keyup', (e) => {
-    if (e.key === 'a' || e.key === 'd') {
-        player.velocity.x = 0
-    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-        enemy.velocity.x = 0
-    }
-})

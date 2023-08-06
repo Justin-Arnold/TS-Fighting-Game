@@ -1,11 +1,43 @@
-import Character from "./Character";
+import Character, { type CharacterActions, type SupportedKeyboardKeys } from "./Character";
 
-export default class Ninja extends Character {
+export default class Samurai extends Character {
+
+    private keysDown: Set<SupportedKeyboardKeys> = new Set()
 
     constructor(
-        position: Character['position'],
+        public config: {
+            startingPosition: Character['position'],
+            keyBinds: CharacterActions,
+        },
         canvasContext: Character['canvasContext'],
     ) {
-        super(canvasContext, position, 150, 50, 'darkred');
+        super(canvasContext, config.startingPosition, 150, 50, 'darkred');
+        this.moveSpeed = 6
+
+        window.addEventListener('keydown', (e) => {
+            this.keysDown.add(e.key as SupportedKeyboardKeys)
+        })
+
+        window.addEventListener('keyup', (e) => {
+            this.keysDown.delete(e.key as SupportedKeyboardKeys)
+        })
+    }
+
+    update() {
+        super.update()
+
+        if (this.keysDown.has(this.config.keyBinds.jump)) {
+            this.jump();
+        }
+        if (this.keysDown.has(this.config.keyBinds.left)) {
+            this.moveLeft();
+        }
+        if (this.keysDown.has(this.config.keyBinds.right)) {
+            this.moveRight();
+        }
+
+        if (!this.keysDown.has(this.config.keyBinds.left) && !this.keysDown.has(this.config.keyBinds.right)) {
+            this.stopMoving()
+        }
     }
 }
