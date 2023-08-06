@@ -55,7 +55,7 @@ export type CharacterActions = {
 }
 
 /** A Character represents a playable character in the game. */
-export default class Character extends BaseEntity {
+export default class extends BaseEntity {
 
     protected jumpHeight: number = 5
     protected moveSpeed: number = 5

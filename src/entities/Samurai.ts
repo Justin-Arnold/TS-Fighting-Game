@@ -1,4 +1,4 @@
-import Character, { type CharacterActions, type SupportedKeyboardKeys } from "./Character";
+import Character, { type CharacterActions, type SupportedKeyboardKeys } from "./PlayableCharacter";
 
 export default class Samurai extends Character {
 

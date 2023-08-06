@@ -1,6 +1,7 @@
 export default class GameInstance {
 
     public canvasContext: CanvasRenderingContext2D
+    private updateCallbacks: (() => void)[] = []
 
     constructor() {
         document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -11,5 +12,20 @@ export default class GameInstance {
 
         const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!
         this.canvasContext = canvas.getContext('2d')!
+
+        this.animationLoop()
+    }
+
+
+    animationLoop() {
+        window.requestAnimationFrame(() => {
+            this.animationLoop()
+            this.canvasContext.clearRect(0, 0, 1024, 512)
+            this.updateCallbacks.forEach(callback => callback())
+        })
+    }
+
+    onUpdate(callback: () => void) {
+        this.updateCallbacks.push(callback)
     }
 }
