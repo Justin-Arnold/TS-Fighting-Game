@@ -27,6 +27,8 @@ export default class Ninja extends Character {
     update() {
         super.update()
 
+        this.stopMoving()
+
         if (this.keysDown.has(this.config.keyBinds.jump)) {
             this.jump();
         }
@@ -35,10 +37,6 @@ export default class Ninja extends Character {
         }
         if (this.keysDown.has(this.config.keyBinds.right)) {
             this.moveRight();
-        }
-
-        if (!this.keysDown.has(this.config.keyBinds.left) && !this.keysDown.has(this.config.keyBinds.right)) {
-            this.stopMoving()
         }
     }
 }

@@ -26,6 +26,8 @@ export default class Samurai extends Character {
     update() {
         super.update()
 
+        this.stopMoving()
+
         if (this.keysDown.has(this.config.keyBinds.jump)) {
             this.jump();
         }
@@ -34,10 +36,6 @@ export default class Samurai extends Character {
         }
         if (this.keysDown.has(this.config.keyBinds.right)) {
             this.moveRight();
-        }
-
-        if (!this.keysDown.has(this.config.keyBinds.left) && !this.keysDown.has(this.config.keyBinds.right)) {
-            this.stopMoving()
         }
     }
 }
