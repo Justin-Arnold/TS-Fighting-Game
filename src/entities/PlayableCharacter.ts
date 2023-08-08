@@ -59,6 +59,8 @@ export default class extends BaseEntity {
 
     protected jumpHeight: number = 5
     protected moveSpeed: number = 5
+    private keysDown: Set<SupportedKeyboardKeys> = new Set()
+
 
     constructor(
         canvasContext: BaseEntity['canvasContext'],
@@ -66,8 +68,17 @@ export default class extends BaseEntity {
         height: BaseEntity['height'],
         width: BaseEntity['width'],
         color: BaseEntity['color'],
+        protected keyBinds: CharacterActions
     ) {
         super(canvasContext, position, height, width, color);
+
+        window.addEventListener('keydown', (e) => {
+            this.keysDown.add(e.key as SupportedKeyboardKeys)
+        })
+
+        window.addEventListener('keyup', (e) => {
+            this.keysDown.delete(e.key as SupportedKeyboardKeys)
+        })
     }
 
     public jump() {
@@ -96,5 +107,21 @@ export default class extends BaseEntity {
         return direction === 'left'
             ? this.position.x <= 0
             : this.position.x + this.width >= this.canvasContext.canvas.width
+    }
+
+    update() {
+        super.update()
+
+        this.stopMoving()
+
+        if (this.keysDown.has(this.keyBinds.jump)) {
+            this.jump();
+        }
+        if (this.keysDown.has(this.keyBinds.left)) {
+            this.moveLeft();
+        }
+        if (this.keysDown.has(this.keyBinds.right)) {
+            this.moveRight();
+        }
     }
 }
