@@ -121,7 +121,6 @@ export default class extends BaseEntity {
     }
 
     public checkAttackCollision(characters: this[]) {
-        console.log('checking')
         characters.forEach(character => {
             if (this.basicAttackBox.position.x < character.position.x + character.width &&
                 this.basicAttackBox.position.x + this.basicAttackBox.width > character.position.x &&

@@ -24,7 +24,7 @@ const player = new Ninja({
     }
 }, game.canvasContext)
 
-game.onUpdate(() => {
-    player.update()
-    enemy.update()
-})
+
+game.registerPlayer(player, 1)
+game.registerPlayer(enemy, 2)
+
