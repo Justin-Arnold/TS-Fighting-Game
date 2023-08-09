@@ -120,6 +120,18 @@ export default class extends BaseEntity {
             : this.position.x + this.width >= this.canvasContext.canvas.width
     }
 
+    public checkAttackCollision(characters: this[]) {
+        console.log('checking')
+        characters.forEach(character => {
+            if (this.basicAttackBox.position.x < character.position.x + character.width &&
+                this.basicAttackBox.position.x + this.basicAttackBox.width > character.position.x &&
+                this.basicAttackBox.position.y < character.position.y + character.height &&
+                this.basicAttackBox.position.y + this.basicAttackBox.height > character.position.y) {
+                character.velocity.y = -30
+            }
+        })
+    }
+
     update() {
         super.update()
 
