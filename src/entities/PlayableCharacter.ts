@@ -60,6 +60,11 @@ export default class extends BaseEntity {
     protected jumpHeight: number = 5
     protected moveSpeed: number = 5
     private keysDown: Set<SupportedKeyboardKeys> = new Set()
+    private basicAttackBox: {
+        position: BaseEntity['position']
+        height: BaseEntity['height']
+        width: BaseEntity['width']
+    }
 
 
     constructor(
@@ -71,6 +76,12 @@ export default class extends BaseEntity {
         protected keyBinds: CharacterActions
     ) {
         super(canvasContext, position, height, width, color);
+
+        this.basicAttackBox = {
+            position: this.position,
+            height: 50,
+            width: 100
+        }
 
         window.addEventListener('keydown', (e) => {
             this.keysDown.add(e.key as SupportedKeyboardKeys)
@@ -113,6 +124,14 @@ export default class extends BaseEntity {
         super.update()
 
         this.stopMoving()
+
+        this.canvasContext.fillStyle = 'green'
+        this.canvasContext.fillRect(
+            this.basicAttackBox.position.x,
+            this.basicAttackBox.position.y,
+            this.basicAttackBox.width,
+            this.basicAttackBox.height
+        )
 
         if (this.keysDown.has(this.keyBinds.jump)) {
             this.jump();
