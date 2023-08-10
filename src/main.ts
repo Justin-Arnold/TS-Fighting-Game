@@ -12,6 +12,7 @@ const enemy = new Samurai({
         jump: 'ArrowUp',
         left: 'ArrowLeft',
         right: 'ArrowRight',
+        basicAttack: 'Enter'
     }
 }, game.canvasContext)
 
@@ -21,6 +22,7 @@ const player = new Ninja({
         jump: 'w',
         left: 'a',
         right: 'd',
+        basicAttack: ' '
     }
 }, game.canvasContext)
 

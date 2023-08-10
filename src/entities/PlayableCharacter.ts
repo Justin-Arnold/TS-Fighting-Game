@@ -5,7 +5,7 @@ export type SupportedKeyboardKeys =
     | 'Shift'
     | 'Control'
     | 'Alt'
-    | 'Space'
+    | ' '
     | 'ArrowLeft'
     | 'ArrowUp'
     | 'ArrowRight'
@@ -52,6 +52,7 @@ export type CharacterActions = {
     jump: SupportedKeyboardKeys
     left: SupportedKeyboardKeys
     right: SupportedKeyboardKeys
+    basicAttack: SupportedKeyboardKeys
 }
 
 /** A Character represents a playable character in the game. */
@@ -122,6 +123,7 @@ export default class extends BaseEntity {
 
     public checkAttackCollision(characters: this[]) {
         characters.forEach(character => {
+            if (!this.keysDown.has(this.keyBinds.basicAttack)) return
             if (this.basicAttackBox.position.x < character.position.x + character.width &&
                 this.basicAttackBox.position.x + this.basicAttackBox.width > character.position.x &&
                 this.basicAttackBox.position.y < character.position.y + character.height &&
