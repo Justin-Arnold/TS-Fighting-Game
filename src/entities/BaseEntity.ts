@@ -5,7 +5,7 @@ type Vector = {
 /** A BaseEntity represents a generic entity in the game that can exist in 2D space and optionally move. */
 export default class BaseEntity {
 
-    private _gravity: number = 0.6;
+    protected _gravity: number = 0.6;
     public velocity: Vector = { x: 0, y: 0 };
 
     constructor(
